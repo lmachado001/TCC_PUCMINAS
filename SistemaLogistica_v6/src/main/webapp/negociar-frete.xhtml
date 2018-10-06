@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="/WEB-INF/template.xhtml">
+
+    <h:form id="form" prependId="false">
+        <p:focus/>
+
+        <f:metadata>
+            <f:viewParam name="id" value="#{freteMB.idFrete}" converter="javax.faces.Long"/>
+            <f:event listener="#{freteMB.inicializar()}" type="preRenderView"></f:event>
+  
+        </f:metadata>
+
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+
+        <p:panelGrid   id="capaPanel_1" columns="1" layout="grid">
+
+            <div id="main-buttons" class="hidden-sm hidden-xs">
+          
+                
+                <p:commandButton value="Solcitar negociação" update="@form"
+                                 
+                                 action="#{negociarBean.viewNegociarFrete()}"
+                               
+                                 icon="fa fa-check" styleClass="btn-primary"/>
+                <p:spacer width="2"/>
+                     <p:commandButton value="Voltar" update="@form"
+                                 
+                                 action="/listar-frete.xhtml?faces-redirect=true"
+                               
+                                 icon="fa fa-check" styleClass="btn-primary"/>         
+             
+               
+            </div>
+
+        </p:panelGrid>
+<p:dialog header="Modal Dialog"   widgetVar="dlg2" modal="true" height="100">
+    <h:outputText value="This is a Modal Dialog." />
+</p:dialog> 
+                <p:separator/>
+
+                <div class="ui-fluid">
+                   <h3>Dados da solicitação de negociação</h3>
+                     <p:spacer width="2"/>
+                    <p:panelGrid id="capaPanel" columns="4" layout="grid" >
+
+                        <h:outputLabel value="De KM"></h:outputLabel>
+                        <p:inputText value="#{freteMB.frete.km_inicio}"></p:inputText>
+
+
+                        <h:outputLabel  value="Ate KM"></h:outputLabel>
+                        <p:inputText value="#{freteMB.frete.km_fim}"></p:inputText>
+
+                        <h:outputLabel value="Custo KM"></h:outputLabel>
+                        <p:inputNumber  value="#{freteMB.frete.custo_KM}"
+                                        symbol="R$ " decimalSeparator="," thousandSeparator="."     >
+
+                        </p:inputNumber>
+                    
+                            </p:panelGrid>
+                      <p:spacer width="2"/>
+                        <h3>Status da solicitação de negociação</h3>
+                     <p:spacer width="2"/>
+                      <p:panelGrid id="capaPanel2" columns="4" layout="grid">
+                               <p:outputLabel value="Status da negociação"></p:outputLabel>
+                        <p:selectOneMenu id="aprov">
+                            <f:selectItem itemLabel="Selecione"/>
+                            <f:selectItem itemLabel="Aprovado"       itemValue="SIM"/>
+                            <f:selectItem itemLabel="Não Aprovado"       itemValue="NAO"/>                    		
+                                    		
+                        </p:selectOneMenu>
+                               
+                          <p:outputLabel value="Tipo de Negociação"></p:outputLabel>
+                        <p:selectOneMenu id="tipoNeg">
+                            <f:selectItem itemLabel="Selecione"/>
+                            <f:selectItem itemLabel="Transportadora parceira"       itemValue="PARC"/>
+                            <f:selectItem itemLabel="Carreto"                       itemValue="CARRETO"/>                    		
+                            <f:selectItem itemLabel="Gerente"                       itemValue="GERENTE"/>                    		
+                            <f:selectItem itemLabel="Contratante"                   itemValue="CONTR"/>                    		
+                            <f:selectItem itemLabel="Outros"                        itemValue="OUTROS"/>                    		
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Tipo de carga"></p:outputLabel>
+                        <p:selectOneMenu id="status" value="#{freteMB.frete.tipo_carga}">
+                            <f:selectItem itemLabel="Selecione"/>
+                            <f:selectItem itemLabel="Carga Geral"       itemValue="GERAL"/>
+                            <f:selectItem itemLabel="Carga Granel"      itemValue="GRANEL_NEO"/>                    		
+                            <f:selectItem itemLabel="Carga Neo Granel"  itemValue="GRANEL_NEO"/>                    		
+                            <f:selectItem itemLabel="Carga Frigorifica" itemValue="GRANEL_FRI"/>                    		
+                            <f:selectItem itemLabel="Carga Perigosa"    itemValue="PERIGOSA"/>                    		
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+
+                </div>
+            </div>
+        </div>
+    </h:form>
+
+</ui:decorate>
+

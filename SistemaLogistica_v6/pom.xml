@@ -1,0 +1,131 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.SistemaLogistica</groupId>
+	<artifactId>SistemaLogistica_v6</artifactId>
+	<version>1.0</version>
+	<packaging>war</packaging>
+
+
+	<!-- Uma boa prática para resolver problemas de acentuação é definir a codificação 
+	     de caracteres do seu projeto como UTF-8 -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<!-- Parâmetros de execução -->
+	<build>
+		<!-- Nome do arquivo empacotado (.war) que você vai entregar para o cliente -->
+		<finalName>SistemaLogisticaPUC_v04</finalName>
+
+
+		<plugins>
+			<!-- Compilador do Maven na versão 3.3 -->
+			<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.3</version>
+			<!-- Compilador do Java na versão 8 -->
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		 <plugin>
+		  <groupId>org.jvnet.jax-ws-commons</groupId>
+		  <artifactId>jaxws-maven-plugin</artifactId>
+		  <version>2.3</version>		
+		
+		 </plugin>
+		 <plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-war-plugin</artifactId>
+		  <version>2.0.2</version>
+		  <configuration>
+		   <webResources>
+		    <resource>
+		     <directory>src</directory>
+		     <targetPath>WEB-INF</targetPath>
+		  
+		    </resource>
+		   </webResources>
+		  </configuration>
+		 </plugin>
+		</plugins>
+	</build>
+
+	<!--Dependências que serão baixadas para o projeto -->
+	<dependencies>
+		<!-- JSF 2.2 -->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.faces</artifactId>
+			<version>2.2.12</version>
+		</dependency>
+		
+		<!-- Primefaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.2</version>
+		 <type>jar</type>
+		</dependency>
+		
+		<!--Todos os temas gratuitos do Primefaces -->
+		<dependency>
+			<groupId>org.primefaces.extensions</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.8</version>
+		</dependency>
+			
+		<!-- MSQL - Connector 6.0.4 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>6.0.4</version>
+		</dependency>
+	
+		<!-- Hibernate Core 5.2.3 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.3.Final</version>
+		</dependency>
+	<!-- <dependency>
+	  <groupId>br.com.correios.ws</groupId>
+	  <artifactId>correiosEJB_v1</artifactId>
+	  <version>1.0-SNAPSHOT</version>
+          <scope>provided</scope>
+	 </dependency> -->
+	 <dependency>
+	  <groupId>org.eclipse.persistence</groupId>
+	  <artifactId>eclipselink</artifactId>
+	  <version>2.5.2</version>
+	  <scope>test</scope>
+	 </dependency>
+	 <dependency>
+	  <groupId>org.eclipse.persistence</groupId>
+	  <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
+	  <version>2.5.2</version>
+	  <scope>test</scope>
+	 </dependency>
+	 <dependency>
+	  <groupId>org.glassfish.metro</groupId>
+	  <artifactId>webservices-rt</artifactId>
+	  <version>2.3</version>
+	  <scope>provided</scope>
+	 </dependency>
+	 <dependency>
+	  <groupId>br.com.correios.ws</groupId>
+	  <artifactId>CorreiosEJB_WS</artifactId>
+	  <version>1.0</version>
+	  <type>jar</type>
+	 </dependency>
+	 <dependency>
+	  <groupId>javax</groupId>
+	  <artifactId>javaee-web-api</artifactId>
+	  <version>7.0</version>
+	  <type>jar</type>
+	 </dependency>
+	</dependencies>
+</project>

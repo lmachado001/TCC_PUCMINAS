@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport"
+                  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+    </h:head>
+
+    <h:body>
+
+        <h:form>
+
+            <div class="ui-fluid">
+
+            </div>
+        </h:form>
+
+
+
+        <h:head>
+            <f:facet name="first">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <meta name="viewport"
+                      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+                <meta name="apple-mobile-web-app-capable" content="yes" />
+            </f:facet>
+        </h:head>
+
+        <div class="ui-fluid">
+            <p:panel header="Sistema de Controle de Logistica" >
+
+
+                <p:ajaxStatus onstart="PF('statusDialog2').show()" onsuccess="PF('statusDialog2').hide()" />
+
+                <p:dialog widgetVar="statusDialog2" 
+                          modal="true" 
+                          draggable="false" 
+                          closable="false" resizable="false" showHeader="false">
+                    <p:graphicImage value="/images/loadingbar.gif" />  
+                </p:dialog>
+                <h:form>
+                    <p:menubar>
+                        <p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home" ></p:menuitem>
+                        <p:menuitem value="Controle de Coleta"   icon="ui-icon-arrowthickstop-1-s" action="listar-coleta.xhtml"></p:menuitem>
+                        <p:menuitem value="Controle de Fretes" update="@form" icon="ui-icon-arrowthickstop-1-s" url="listar-frete.xhtml"></p:menuitem>
+                        <p:menuitem value="Controle de Logística"  icon="ui-icon-arrowthickstop-1-s" url=""></p:menuitem>
+                        <p:menuitem value="Controle de expedição"  icon="ui-icon-arrowthickstop-1-s" url=""></p:menuitem>
+                        <p:menuitem value="Controle de devolução"  icon="ui-icon-arrowthickstop-1-s" url=""></p:menuitem>
+                        <p:menuitem value="CT-e"  icon="ui-icon-arrowthickstop-1-s" url=""></p:menuitem>
+                        <p:menuitem value="Relatórios"  icon="ui-icon-document" url=""></p:menuitem>
+                        <p:menuitem value="SAC"  icon="ui-icon-arrowthickstop-1-s" url=""></p:menuitem>
+                    </p:menubar>
+                    <hr/>
+                    <ui:insert > </ui:insert>
+
+
+                </h:form>
+            </p:panel>
+        </div>
+
+
+        <h:outputScript name="js/ripple-effect.js" library="adamantium-layout" />
+        <h:outputScript name="js/perfect-scrollbar.js"
+                        library="adamantium-layout" />
+        <h:outputScript name="js/layout.js" library="adamantium-layout" />
+        <h:outputStylesheet name="css/core-layout.css"
+                            library="adamantium-layout" />
+        <h:outputStylesheet name="css/animate.css" library="adamantium-layout" />
+        <h:outputStylesheet name="css/adamantium-font.css"
+                            library="adamantium-layout" />
+        <h:outputStylesheet name="css/ripple-effect.css"
+                            library="adamantium-layout" />
+        <h:outputStylesheet name="css/perfect-scrollbar.css"
+                            library="adamantium-layout" />
+        <h:outputStylesheet name="css/font-awesome.css"
+                            library="adamantium-layout" />
+        <h:outputStylesheet name="css/adamantium-layout.css"
+                            library="adamantium-layout" />
+    </h:body>
+
+
+</html>

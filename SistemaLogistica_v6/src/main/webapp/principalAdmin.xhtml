@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <link rel="stylesheet" href="resources/css/estilos.css"/>
+        <title>Sistema de Controle Logístico</title>
+    </h:head>
+    <body>
+        <h:form>
+            <div class="ui-fluid">
+                <p:panel header="Sistema de Controle Logístico - Portal do Administrador">
+
+                    <p:ajaxStatus onstart="PF('statusDialog2').show()" onsuccess="PF('statusDialog2').hide()" />
+
+                    <p:dialog widgetVar="statusDialog2" 
+                              modal="true" 
+                              draggable="false" 
+                              closable="false" resizable="false" showHeader="false">
+                        <p:graphicImage value="/images/loadingbar.gif" />  
+                    </p:dialog>
+                    
+                    <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" 
+                                 layout="grid" styleClass="ui-panelgrid-blank" >
+
+                    <p:menu toggleable="true">
+                        <p:submenu label="Cadastros">
+                            <p:menuitem value="Usuário" icon="ui-icon-star" action="cadUsuario.xhtml"/>
+                        <p:menuitem value="Alterar Senha" icon="ui-icon-star"
+                                    action="/alterarSenha.xhtml" />
+                             <p:separator/>
+                            <p:menuitem value="Clientes" icon="ui-icon-star" />
+                            <p:menuitem value="Transportadoras" icon="ui-icon-star" />
+                            <p:menuitem value="Parceiros" icon="ui-icon-star" />
+                        </p:submenu>
+                        <p:separator/>
+                        <p:submenu label="Relatórios">
+                            <p:menuitem value="Gerenciais" icon="ui-icon-star" />
+                            <p:menuitem value="Financeiros" icon="ui-icon-star" />
+                        </p:submenu>
+                    
+                    </p:menu>
+                    </p:panelGrid>
+                        
+                    <p:panelGrid columns="2" columnClasses="ui-grid-col-1,ui-grid-col-11" 
+                                 layout="grid" styleClass="ui-panelgrid-blank">  
+
+                        <p:commandButton value="Sair" 
+                                         icon="ui-icon-star"  
+                                         action="#{loginMB.doLogout()}" 
+                                         ajax="false"/>
+                    </p:panelGrid>
+                </p:panel>
+            </div>
+        </h:form>
+    </body>
+</html>

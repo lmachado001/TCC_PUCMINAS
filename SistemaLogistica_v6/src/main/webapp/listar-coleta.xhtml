@@ -1,0 +1,107 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="/WEB-INF/template.xhtml"> 
+
+
+    <h:form id="form" prependId="false">
+           
+        <f:event listener="#{coletaMB.listar()}" type="preRenderView" />
+    
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                
+                <p:panelGrid style=" text-align:left"  id="capaPanel_2" columns="20" layout="grid">
+                    <p:commandButton action="#{coletaMB.novoColeta()}" ajax="false" icon="fa fa-plus"
+                                 value="Novo" styleClass="btn-primary"/>
+                <p:spacer width="5"/>
+
+               </p:panelGrid>
+
+                <p:dataTable
+
+                    id="coletaTable" 
+                    widgetVar="coletaTable" rows="10"
+                    value="#{coletaMB.coletas}" 
+                    var="coleta" rowKey="#{coleta.id}"
+                    selection="#{coletaMB.coletasSelecionados}"	                    			 
+                    paginator="true" 	                                 
+                    paginatorPosition="bottom"	                                 
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+                    currentPageReportTemplate=""
+                    rowsPerPageTemplate="5,10,15,20,30">	
+
+                    <p:column headerText="Coleta"                 
+                              sortBy="#{coleta.id}" filterMatchMode="contains">
+                        <h:link value="#{coleta.id}" outcome="#{coletaMB.editar(coleta)}" >
+                            <f:param name="id" value="#{coleta.id}"/>
+                        </h:link>	                        
+                    </p:column>
+
+
+                    <!--   <p:column headerText="Origem" styleClass="align-center"
+                                 sortBy="#{coleta.tipo_carga.descricao}" filterMatchMode="contains">
+                           <h:outputText value="#{coleta.tipo_carga.descricao}" />
+                       </p:column> 
+                       
+                         <p:column headerText="Destino"
+                            sortBy="#{coleta.km_fim}" filterMatchMode="contains">
+                           <h:outputText value="#{coleta.km_fim}" />
+                       </p:column>
+                       
+                    -->
+
+                    <p:column headerText="Data"
+                              sortBy="#{coleta.data}" filterMatchMode="contains">
+                        <h:outputText value="#{coleta.data}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                        </h:outputText>
+
+
+                    </p:column>
+
+                    <p:column headerText="Prazo"
+                              sortBy="#{coleta.prazo}" filterMatchMode="contains">
+                        <h:outputText value="#{coleta.prazo}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                        </h:outputText>
+                    </p:column>
+
+
+                    <p:column headerText="Valor" >
+                        <h:outputText value="#{coleta.valor}" >
+                            <f:convertNumber currencySymbol="R$" type="currency"/>
+                        </h:outputText>
+                    </p:column>	
+                    
+                        <p:column headerText="Tipo de serviço">
+                            <h:outputText value="#{coleta.servico.descricao}" />
+                    </p:column>
+
+                    <p:column headerText="Situação">          
+                        <h:outputText value="#{coleta.situacao.descricao}" />
+                    </p:column>
+
+                              <p:column headerText="Origem">          
+                                  <h:outputText value="#{coleta.origem.descricao}" />
+                    </p:column>
+                    
+                              <p:column headerText="Situação">          
+                                  <h:outputText value="#{coleta.faturado.descricao}" />
+                    </p:column>
+                    
+                       
+                    
+                
+
+                </p:dataTable>
+
+
+            </div>
+        </div>
+    </h:form>
+</ui:decorate>
+

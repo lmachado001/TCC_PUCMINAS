@@ -1,0 +1,186 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html" 
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:p="http://primefaces.org/ui"               
+             xmlns:rich="http://richfaces.org/rich"
+             xmlns:a4j="http://richfaces.org/a4j"
+             xmlns:f="http://java.sun.com/jsf/core"
+             template="/WEB-INF/template.xhtml">
+
+    <h:form id="form" prependId="false">
+        <p:focus/>
+
+        <f:metadata>
+            <f:viewParam name="idColeta" value="#{coletaMB.idColeta}" converter="javax.faces.Long"/>
+            <f:event  listener="#{coletaMB.inicializar()}" type="preRenderView"></f:event>
+        </f:metadata>
+            
+
+        <script type="text/javascript" src="js/jquery-1.3.2.js"></script>  
+        <script type="text/javascript" src="js/maskedinput-1.1.2.pack.js"></script>
+
+        <script type="text/javascript">
+            function retorna() {
+                jQuery(function ($) {
+                    $(".data").mask("99/99/9999");
+                    $(".datahora").mask("99/99/9999 99:99");
+                    $(".hora").mask("99:99:99", {placeholder: "_"});
+                    $(".horaminuto").mask("99:99", {placeholder: "_"});
+                    $(".fone").mask("(99)9999-9999");
+                    $(".foneD").mask("(99)99999-9999");
+                    $(".cep").mask("999-99999");
+                    $(".altura").mask("9.99", {placeholder: "_"});
+                    $(".cpf").mask("999.999.999-99");
+                    $(".cnpj").mask("99.999.999/9999-99");
+                });
+            }
+            retorna();
+        </script>
+
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <p:panelGrid   id="capaPanel_2" columns="1" layout="grid">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton 
+                            value="Salvar" update="@form"
+                            action="#{coletaMB.Salvar()}"
+                            icon="fa fa-check" styleClass="btn-primary"/>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Faturar" update="@form"
+
+                                         icon="fa fa-check" styleClass="btn-primary"/>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Tranferir" process="@this"
+                                         icon="fa fa-check"
+                                         styleClass="btn-danger">
+                        </p:commandButton>
+
+                        <p:commandButton value="Excluir" process="@this"
+                                         action="#{coletaMB.excluirSel()}"
+                                         icon="fa fa-trash"
+                                         styleClass="btn-danger">
+                        </p:commandButton> 
+
+
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Voltar" immediate="true"
+                                         action="listar-coleta?faces-redirect=true"
+                                         process="@this"
+                                         icon="fa fa-close"/>
+
+                    </div>
+
+                </p:panelGrid>
+
+                <p:separator/>
+
+                <div class="ui-fluid">
+                    <h:form id="formEnd">
+                    <p:panelGrid id="capaPanel1" columns="10" layout="grid" 
+                                 style = "display:grid;   text-align:left">
+
+
+
+                        <h:outputLabel value="CEP origem"></h:outputLabel>
+                        <p:inputText id="end_ori"  style="width:100px"  styleClass="cep" 
+
+                                       value="#{coletaMB.coleta.cep_ori}"> 
+                             <f:ajax event="valueChange" render="formEnd" listener="#{coletaMB.pesquisarCEP('O')}" />
+                        </p:inputText>
+
+                        <h:outputLabel value="End. Origem"> </h:outputLabel>
+                        <p:inputText   id="end1"  style="width:200px" value="#{coletaMB.coleta.endereco_ori}">
+                           
+                        </p:inputText>
+
+                        <h:outputLabel value="N.Ori"> </h:outputLabel>
+                        <p:inputText   style="width:50px" value="#{coletaMB.coleta.num_ori}"/>
+                        
+                         <h:outputLabel value="Cidade Ori."> </h:outputLabel>
+                         <p:inputText   value="#{coletaMB.coleta.cidade_ori}"/>
+                         
+                                   <h:outputLabel value="Estado Ori."> </h:outputLabel>
+                                   <p:inputText   value="#{coletaMB.coleta.estado_ori}"/>
+                        
+
+                        
+
+                        <h:outputLabel  id="end_des" value="CEP Destino"></h:outputLabel>
+                       
+                        <p:inputText style="width:100px" styleClass="cep" 
+                                     value="#{coletaMB.coleta.cep_dest}">
+                        <f:ajax event="valueChange" render="formEnd" listener="#{coletaMB.pesquisarCEP('')}" />
+                        </p:inputText>
+                        <h:outputLabel value="End. Destino"></h:outputLabel>
+                        
+                        <p:inputText style="width:200px" value="#{coletaMB.coleta.endereco_dest}" >
+                            
+                        </p:inputText>
+                        <h:outputLabel value="N.Dest"> </h:outputLabel>
+                        <p:inputText   style="width:50px" value="#{coletaMB.coleta.num_dest}"/>
+                        
+                                  <h:outputLabel value="Cidade Dest."> </h:outputLabel>
+                                  <p:inputText   value="#{coletaMB.coleta.cidade_dest}"/>
+                         
+                                   <h:outputLabel value="Estado Dest."> </h:outputLabel>
+                                   <p:inputText   value="#{coletaMB.coleta.estado_des}"/>
+                        
+
+                    </p:panelGrid>
+                        </h:form>
+                    <p:panelGrid id="capaPanel" columns="6" layout="grid" 
+                                 style = "display:block; text-align:left">
+
+
+                        <h:outputLabel value="Data da coleta"></h:outputLabel>
+                        <p:calendar value="#{coletaMB.coleta.data}"></p:calendar>
+
+
+                        <h:outputLabel value="Prazo"></h:outputLabel>
+                        <p:calendar value="#{coletaMB.coleta.prazo}"></p:calendar>
+
+                        <h:outputLabel value="Valor"></h:outputLabel>
+                        <p:inputNumber  value="#{coletaMB.coleta.valor}"
+                                        symbol="R$ " decimalSeparator="," thousandSeparator="."     >
+
+                        </p:inputNumber>
+
+
+                        <p:outputLabel value="Situação" for="situacao"/>
+                        <p:selectOneMenu   id="situacao" value="#{coletaMB.coleta.situacao}">
+                            <f:selectItem itemLabel="Selecione"/>
+                            <f:selectItem itemLabel="Tranferido"        itemValue="TRANSF"/>
+                            <f:selectItem itemLabel="Em andamento"      itemValue="AMANDAMENTO"/> 
+                            <f:selectItem itemLabel="Concluído"         itemValue="CONCLUIDO"/> 
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Tipo de serviço" />
+                        <p:selectOneMenu  value="#{coletaMB.coleta.servico}">
+                            <f:selectItem itemLabel="Selecione"/>
+                            <f:selectItem itemLabel="Coleta"       itemValue="COLETA"/>
+                            <f:selectItem itemLabel="Transporte"      itemValue="TRANSP"/> 
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Origem da coleta" for="origem"/>
+                        <p:selectOneMenu label="" id="origem" value="#{coletaMB.coleta.origem}">
+                            <f:selectItem itemLabel="Selecione"/>
+                            <f:selectItem itemLabel="Local"       itemValue="LOCAL"/>
+                            <f:selectItem itemLabel="Clientes"      itemValue="CLIENTE"/>                    		
+
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Faturado"/>
+                        <p:selectOneMenu label="" id="faturado" value="#{coletaMB.coleta.faturado}">
+                            <f:selectItem itemLabel="Selecione"/>
+                            <f:selectItem itemLabel="Sim"       itemValue="SIM"/>
+                            <f:selectItem itemLabel="Não"      itemValue="NAO"/>                   		
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+
+                </div>
+            </div>
+        </div>
+
+    </h:form>
+</ui:decorate>
